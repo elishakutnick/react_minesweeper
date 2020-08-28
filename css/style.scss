@@ -1,0 +1,158 @@
+@import url("https://meyerweb.com/eric/tools/css/reset/reset.css");
+@import url("https://unpkg.com/98.css");
+@import "~fontsource-dseg7/classic-mini-700.css";
+
+$tile-background: #c0c0c0;
+$tile-border: #efefef;
+$tile-explored-border: #999999;
+
+.grid-row {
+  display: flex;
+  flex-direction: row;
+  .tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-style: outset;
+    border-color: $tile-border;
+    border-width: 0.2rem;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: default;
+    user-select: none;
+    &:hover {
+      border-color: lighten($tile-border, 5%);
+      background-color: lighten($tile-background, 5%);
+    }
+    &.explored {
+      border-style: solid;
+      border-color: $tile-explored-border;
+      border-width: 0.1rem;
+      &:hover {
+        background-color: $tile-background;
+        border-color: $tile-explored-border;
+      }
+      &.bomb-1 {
+        color: blue;
+      }
+      &.bomb-2 {
+        color: green;
+      }
+      &.bomb-3 {
+        color: red;
+      }
+      &.bomb-4 {
+        color: purple;
+      }
+      &.bomb-5 {
+        color: maroon;
+      }
+      &.bomb-6 {
+        color: turquoise;
+      }
+      &.bomb-7 {
+        color: black;
+      }
+      &.bomb-8 {
+        color: gray;
+      }
+    }
+    &.flagged {
+      &::after {
+        content: "🚩";
+      }
+    }
+    &.bombed {
+      @extend .explored;
+      &::after {
+        content: "💣";
+      }
+    }
+  }
+}
+
+.game-main {
+  display: flex;
+  justify-content: center;
+  border-style: inset;
+  border-width: 0.15rem;
+  border-color: $tile-border;
+}
+
+.status-bar {
+  $font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-style: inset;
+  border-color: $tile-border;
+  border-width: 0.2rem;
+  margin-bottom: 0.5rem;
+  & > .display {
+    position: relative;
+    background-color: black;
+    padding: 0.1em;
+    border-style: inset;
+    border-color: $tile-border;
+    border-width: 0.1em;
+    z-index: 0;
+    font-family: DSEG7, monospace;
+    & > span {
+      font-size: $font-size;
+      color: red;
+    }
+    &::after {
+      font-size: $font-size;
+      content: "888";
+      position: absolute;
+      left: 0.05em;
+      color: maroon;
+      z-index: -1;
+    }
+  }
+  button {
+    font-size: 18px;
+    min-height: 1.5em;
+    min-width: 1.5em;
+    padding: 0.15em;
+    &:active {
+      padding: 0.15em;
+    }
+  }
+}
+
+.window {
+  margin: auto;
+  position: relative;
+  .modal {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    width: 200px;
+    &.show {
+      display: block;
+    }
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background: teal;
+  padding: 2rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.play-again {
+  justify-content: flex-end;
+}
